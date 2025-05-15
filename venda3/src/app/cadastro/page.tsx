@@ -15,8 +15,6 @@ export default function SignUpPage() {
    async function handlerRegister() {
     setLoading(true);  
 
-    console.log('Dados recebidos:', { name, email, password });
-
       const res = await fetch('/api/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
