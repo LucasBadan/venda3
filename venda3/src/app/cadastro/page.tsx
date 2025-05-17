@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 export default function SignUpPage() {
  
@@ -24,7 +25,7 @@ export default function SignUpPage() {
  if (res.ok) {
     const data = await res.json();
     console.log("Usuário cadastrado:", data.name); 
-    router.push('/home');  
+    router.push('/login');  
 } else {
     console.error("Erro ao cadastrar:", await res.text());
 }
@@ -79,6 +80,7 @@ export default function SignUpPage() {
          {loading ? 'Cadastrando...' : 'Cadastrar'}
         </button>
         </form>
+        <h1 className='text-black text-center mt-4 '>Já tem uma conta? <Link href="/login" className="text-pink-500 hover:text-stone-500">Login</Link></h1>
       </div>
     </div>
   );

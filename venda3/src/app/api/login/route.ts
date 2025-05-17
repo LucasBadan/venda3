@@ -1,4 +1,4 @@
-import { NextRequest } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import prisma from '@/app/prisma/prismaClient';
 
 export async function POST(req: NextRequest) {
@@ -10,16 +10,12 @@ export async function POST(req: NextRequest) {
     });
 
     if (!user || user.password !== password) {
-      return new Response(JSON.stringify({ error: 'Usuário ou senha inválidos' }), { status: 401 });
+      return NextResponse.json({ error: 'Usuário ou senha inválidos' }, { status: 401 });
     }
 
-    return new Response(JSON.stringify({ message: 'Login bem-sucedido', user }), {
-      status: 200,
-    });
+    return NextResponse.json({ message: 'Login bem-sucedido', user }, { status: 200 });
   } catch (error) {
     console.error('Erro ao realizar login:', error);
-    return new Response(JSON.stringify({ error: 'Erro ao realizar login' }), {
-      status: 500,
-    });
+    return NextResponse.json({ error: 'Erro ao realizar login' }, { status: 500 });
   }
 }

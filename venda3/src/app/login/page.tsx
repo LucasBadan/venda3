@@ -3,31 +3,49 @@
 import {useState} from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import AuthService from '../services/auth.service';
 
 export default function LoginPage() {
- const router = useRouter();
+  const router = useRouter();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
 
+async function handlerLogin(event: React.MouseEvent<HTMLButtonElement>) {
+  event.preventDefault();
+  setLoading(true);
 
-  async function handlerLogin() {
-    setLoading(true);
-
+  try {
     const res = await fetch('/api/login', {
       method: 'POST',
-      headers: {'Content-Type' : 'application/json'},
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password }),
     });
 
-    if (res.ok) {
+    if (!res.ok) {
+      const errorData = await res.json();
+      console.error("Erro ao realizar login:", errorData.error);
+      alert(errorData.error); 
+      return;
+    }
+
     const data = await res.json();
-    console.log("Usuário logado:", data.name);
+    console.log("Usuário logado:", data.user.name);
+    
+    AuthService.login(data.token);
+
     router.push('/home');
+
+  } catch (error) {
+    console.error("Erro ao realizar login:", error);
+    alert("Erro inesperado. Tente novamente.");
+    
+  } finally {
+    setLoading(false);
   }
 }
- 
+
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
@@ -57,18 +75,18 @@ export default function LoginPage() {
           </div>
 
           <div className="flex items-center justify-between mt-4">
-            <button className="px-4 py-2 bg-stone-500 text-white rounded hover:bg-stone-500 cursor-pointer"
+            <button className={`px-4 py-2 bg-stone-500 text-white rounded ${loading ? 'bg-gray-200 cursor-wait' : 'bg-stone-500 hover:bg-stone-600 cursor-pointer'}`}
             type="button"
             onClick={handlerLogin}
             disabled={loading}
             >
             {loading ? 'Entrando...' : 'Entrar'}
+          
             </button>
 
             <Link href="/cadastro"className="px-4 py-2 bg-stone-500 text-white rounded hover:bg-stone-500">
              Cadastrar-se
             </Link>
-      
           </div>
         </form>
       </div>
