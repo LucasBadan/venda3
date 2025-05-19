@@ -27,7 +27,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
   return (
     <html lang="pt-BR">
-      <body className="">
+      <body className="flex flex-col min-h-screen">
     <header className="w-full h-26 bg-stone-500">
   <div className="flex items-center justify-between h-full px-4 sm:px-6 lg:px-8">
 
