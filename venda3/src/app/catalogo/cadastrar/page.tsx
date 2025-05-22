@@ -16,18 +16,17 @@ export default function CadastrarVestido() {
         setLoading(true);
 
         try{
-            const res = await fetch('/api/add/add-vestido', {
+            const res = await fetch('/api/vestidos', {
                 method: 'POST',
                 headers:{'content-Type': 'application/json'},
                 body: JSON.stringify({nome, descricao, preco, tamanho, cor, imagemUrl}),
         });
     
-
         if(!res.ok){
             const errorData = await res.json();
             console.error('Erro ao cadastrar vestido:', errorData);
             alert('Erro ao cadastrar vestido. Tente novamente.');
-;
+          return;
         }
 
         alert('Vestido cadastrado com sucesso!');
@@ -55,14 +54,14 @@ export default function CadastrarVestido() {
           placeholder="Nome"
           value={nome}
           onChange={(e) => setNome(e.target.value)}
-          className="placeholder-black text-black border border-black w-full p-2 border rounded "
+          className="placeholder-black text-black  border-black w-full p-2 border rounded "
           required
         />
         <textarea
           placeholder="Descrição"
           value={descricao}
           onChange={(e) => setDescricao(e.target.value)}
-          className="text-black w-full p-2 border rounded placeholder-black border border-black"
+          className="text-black w-full p-2 border rounded placeholder-black  border-black"
           required
         />
         <input
@@ -70,7 +69,7 @@ export default function CadastrarVestido() {
           placeholder="Preço"
           value={preco}
           onChange={(e) => setPreco(e.target.value)}
-          className="text-black w-full p-2 border rounded placeholder-black border border-black"
+          className="text-black w-full p-2 border rounded placeholder-black  border-black"
           required
         />
         <input
@@ -78,7 +77,7 @@ export default function CadastrarVestido() {
           placeholder="Tamanho"
           value={tamanho}
           onChange={(e) => setTamanho(e.target.value)}
-          className="text-black w-full p-2 border rounded placeholder-black border border-black"
+          className="text-black w-full p-2 border rounded placeholder-black  border-black"
           required
         />
         <input
@@ -86,7 +85,7 @@ export default function CadastrarVestido() {
           placeholder="Cor"
           value={cor}
           onChange={(e) => setCor(e.target.value)}
-          className="text-black w-full p-2 border rounded placeholder-black border border-black "
+          className="text-black w-full p-2 border rounded placeholder-black border-black "
           required
         />
         <input
@@ -94,13 +93,13 @@ export default function CadastrarVestido() {
           placeholder="URL da Imagem"
           value={imagemUrl}
           onChange={(e) => setImagemUrl(e.target.value)}
-          className="text-black w-full p-2 border rounded placeholder-black border border-black"
+          className="text-black w-full p-2 border rounded placeholder-black border-black"
           required
         />
         <button
           type="submit"
           disabled={loading}
-          className="w-full p-2 bg-stone-500 text-white rounded hover:stone-600"
+          className="w-full p-2 bg-stone-500 text-white rounded hover:stone-600 cursor-pointer hover:bg-black"
         >
           {loading ? 'Cadastrando...' : 'Cadastrar'}
         </button>
