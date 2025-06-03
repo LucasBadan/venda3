@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 
 export default function CadastrarVestido() {
     const [nome, setNome] = useState('');
@@ -103,6 +104,12 @@ export default function CadastrarVestido() {
         >
           {loading ? 'Cadastrando...' : 'Cadastrar'}
         </button>
+             <Link
+          href="/catalogo"
+          className="text-stone-500 hover:underline text-lg"
+        >
+          Voltar
+        </Link>
       </form>
     </div>
   );

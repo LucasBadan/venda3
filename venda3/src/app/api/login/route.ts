@@ -19,3 +19,46 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Erro ao realizar login' }, { status: 500 });
   }
 }
+
+export async function GET() {
+  try {
+    const vestidos = await prisma.roupas.findMany();
+    return NextResponse.json(vestidos);
+  } catch (error) {
+    console.error('Erro ao buscar vestidos:', error);
+    return NextResponse.json({ error: 'Erro ao buscar vestidos' }, { status: 500 });
+  }
+}
+
+export async function DELETE(request: NextRequest) {
+  const { id } = await request.json();
+
+  try {
+    await prisma.roupas.delete({
+      where: { id },
+    });
+
+    return NextResponse.json({ message: 'Vestido deletado com sucesso' });
+  } catch (error) {
+    console.error('Erro ao deletar vestido:', error);
+    return NextResponse.json({ error: 'Erro ao deletar vestido' }, { status: 500 });
+  }
+}
+
+
+export async function PUT(request: NextRequest, { params }: { params: { id: string } }) {
+  const body = await request.json();
+  const id = Number(params.id);
+
+  try {
+    const vestido = await prisma.roupas.update({
+      where: { id },
+      data: body,
+    });
+
+    return NextResponse.json(vestido);
+  } catch (error) {
+    console.error('Erro ao atualizar vestido:', error);
+    return NextResponse.json({ error: 'Erro ao atualizar vestido' }, { status: 500 });
+  }
+}

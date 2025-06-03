@@ -101,9 +101,19 @@ export default function Vestidos() {
             </Link>
           </div>
         </div>
+
       ))}
     </>
   )}
-</div>
-  );
+  <div className="text-center mb-2 pr-2">
+        <Link
+          href="/cadastrar"
+           className="text-stone-500 hover:underline text-lg"
+          >
+          Cadastrar Vestido
+        </Link>
+      </div>  
+ </div>
+
+  );        
 }

@@ -1,12 +1,10 @@
-import type { NextConfig } from "next";
+import { i18n } from './src/next-i18next.config';
+import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  /* config options here */
-};
-
-module.exports = {
+  i18n,
   images: {
-    domains: ['kojistore.com.br', 'images.tcdn.com.br'], // coloque o domínio da URL
+    domains: ['kojistore.com.br', 'images.tcdn.com.br'],
   },
 };
 

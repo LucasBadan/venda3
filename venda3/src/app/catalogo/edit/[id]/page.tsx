@@ -2,7 +2,6 @@
 import { use } from 'react';
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-
 type VestidoForm = {
   nome: string;
   descricao: string;
@@ -11,7 +10,6 @@ type VestidoForm = {
   cor: string;
   imagemUrl: string;
 };
-
 export default function EditVestido({ params }: {params: Promise<{ id: string }> }) {
   const {id} = use (params);
   const router = useRouter();
@@ -25,7 +23,6 @@ export default function EditVestido({ params }: {params: Promise<{ id: string }>
   });
   const [loading, setLoading] = useState(true); 
   
-
   useEffect(() => {
     async function fetchVestido() {
       try {

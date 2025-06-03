@@ -1,4 +1,8 @@
 
+'use client';
+
+import Image from "next/image"; 
+
 export default function ImageGallery() {
   const images = [
     "/images/vestidofundo.png",
@@ -10,10 +14,10 @@ export default function ImageGallery() {
   ];
 
   return (
-    <div className="grid grid-cols-3 gap-4 gap-y-20 p-4">
+    <div className="grid grid-cols-3 gap-4 gap-y-20 p-4 md:grid-cols-3">
       {images.map((src, index) => (
-        <div key={index} className="flex justify-center items-center  overflow-hiddenflex justify-center items-center">
-          <img
+        <div key={index} className="flex justify-center items-center overflow-hiddenflex">
+          <Image
             src={src}
             alt={`Vestido ${index + 1}`}
             width={400}
