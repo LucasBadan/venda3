@@ -64,56 +64,67 @@ export default function Vestidos() {
     );
   }
 
-  return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-  {vestidos.length === 0 ? (
-    <p className="text-stone-500 text-lg text-center mt-10">
-      Nenhum vestido encontrado.
-    </p>
-  ) : (
-    <>
-      {vestidos.map((vestido) => (
-        <div key={vestido.id} className="max-w-md mx-auto bg-white p-4 shadow rounded">
-          <Image
-            src={vestido.imagemUrl}
-            alt={vestido.nome}
-            width={300}
-            height={200}
-            className="w-full h-120 object-cover rounded"
-          />
-          <h2 className="text-lg font-semibold text-stone-500">{vestido.nome}</h2>
-          <p className="text-stone-500">Descrição: {vestido.descricao}</p>
-          <p className="text-stone-500">Cor: {vestido.cor}</p>
-          <p className="text-stone-500">Tamanho: {vestido.tamanho}</p>
-          <p className="text-stone-500">Preço: R$ {vestido.preco.toFixed(2)}</p>
-          <div className="flex gap-2 mt-2">
-            <button
-              onClick={() => handleDelete(vestido.id)}
-              className="bg-black text-white px-3 py-1 rounded cursor-pointer hover:bg-stone-500"
-            >
-              Deletar
-            </button>
-            <Link
-              href={`/catalogo/edit/${vestido.id}`}
-              className="bg-black text-white px-3 py-1 rounded cursor-pointer hover:bg-stone-500"
-            >
-              Editar
-            </Link>
-          </div>
-        </div>
-
-      ))}
-    </>
-  )}
-  <div className="text-center mb-2 pr-2">
-        <Link
-          href="/cadastrar"
-           className="text-stone-500 hover:underline text-lg"
+ return (
+  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10 px-4">
+    {vestidos.length === 0 ? (
+      <p className="text-stone-500 text-lg text-center mt-10">
+        Nenhum vestido encontrado.
+      </p>
+    ) : (
+      <>
+        {vestidos.map((vestido) => (
+          <div
+            key={vestido.id}
+            className="relative max-w-xs mx-auto bg-pink-50 shadow-lg rounded-2xl overflow-hidden flex flex-col items-center"
           >
-          Cadastrar Vestido
-        </Link>
-      </div>  
- </div>
 
-  );        
+            {/* Imagem */}
+            <Image
+              src={vestido.imagemUrl}
+              alt={vestido.nome}
+              width={420}
+              height={450}
+              className="w-full h-[550px] object-cover rounded-2xl"
+            />
+
+            {/* Conteúdo */}
+            <div className="p-4 w-full flex flex-col items-start">
+              <h2 className="text-lg font-semibold text-stone-700 mb-1">{vestido.nome}</h2>
+              <p className="text-stone-500 text-sm mb-1">Descrição: {vestido.descricao}</p>
+              <p className="text-stone-500 text-sm mb-1">Cor: {vestido.cor}</p>
+              <p className="text-stone-500 text-sm mb-1">Tamanho: {vestido.tamanho}</p>
+              <p className="text-stone-700 text-base font-bold mb-3">
+                Preço: R$ {vestido.preco.toFixed(2)}
+              </p>
+              <div className="flex gap-2 mt-2">
+                <button
+                  onClick={() => handleDelete(vestido.id)}
+                  className="bg-black text-white px-4 py-2 rounded-lg font-medium hover:bg-stone-700 transition"
+                >
+                  Deletar
+                </button>
+                <Link
+                  href={`/catalogo/edit/${vestido.id}`}
+                  className="bg-black text-white px-4 py-2 rounded-lg font-medium hover:bg-stone-700 transition"
+                >
+                  Editar
+                </Link>
+              </div>
+            </div>
+          </div>
+        ))}
+      </>
+    )}
+
+    {/* Botão para cadastrar vestido */}
+    <div className="col-span-full text-center mt-6">
+      <Link
+        href="/cadastrar"
+        className="inline-block bg-pink-100 text-pink-600 font-semibold px-6 py-2 rounded-full shadow hover:bg-pink-200 transition mb-3"
+      >
+        Cadastrar Vestido
+      </Link>
+    </div>
+  </div>
+);
 }
